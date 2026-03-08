@@ -1,7 +1,35 @@
 <html>
     <body>
-        <h1>
+        <h1 style="color: red">
             Primera plantilla
         </h1>
+        {# COMENTARIO}
+
+        {% if nombre_persona == 'Juan' %}
+            <p>El curso lo imparte el profesor titular</p>
+
+            {% else %}
+                <p>El curso lo imparte el profesor suplente</p>
+        {% endif %}
+
+
+        <p>El nombre de profe es: {{nombre_persona|upper}}</p>
+        <p>Y su apellido es: {{apellido_persona.upper}}</p>
+        <p>La fecha de hoy es: {{fecha.day}} / {{fecha.month}} / {{fecha.year}}</p>
+        <p><strong>los temas a tratar son:</strong></p>
+        <p>
+            <ul>
+            {% if temas %}
+                {% for el_tema in temas %}
+
+                    <li>{{el_tema|first|lower}}</li>
+
+                {% endfor %}
+            {% else %}
+                <p> No hay elementos que mostrar</p>
+            {% endif %}
+            </ul>
+
+        </p>
     </body>
-    </html>
+</html>

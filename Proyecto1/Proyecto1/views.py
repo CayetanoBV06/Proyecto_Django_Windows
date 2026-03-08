@@ -1,17 +1,31 @@
 from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
+from django.template import loader
 
-def saludo(request):   #primera vista 
-    doc_externo=open("C:/Users/usuario/OneDrive/Escritorio/Proyecto_Django_Windows/Proyecto1/Proyecto1/layouts/plantilla.html")
+class Persona(object):
+    def __init__(self, nombre, apellido):
+        self.nombre=nombre
+        self.apellido=apellido
 
-    plt=Template(doc_externo.read())
+def saludo(request):   #primera vista
 
-    doc_externo.close()
+    p1=Persona("Juan","Diaz") 
 
-    ctx=Context()
+   # nombre = "Caye"
+    #apellido="Benitez"
+    ahora=datetime.datetime.now()
+    temas_curso=["Plantillas","si","mno"]
 
-    documento=plt.render(ctx)
+   # doc_externo=open("C:/Users/usuario/OneDrive/Escritorio/Proyecto_Django_Windows/Proyecto1/Proyecto1/layouts/plantilla.html")
+
+    #plt=Template(doc_externo.read())
+
+    #doc_externo.close()
+    doc_externo=loader.get_template('plantilla.html')
+    #ctx=Context({"nombre_persona":p1.nombre, "apellido_persona":p1.apellido, "fecha":ahora, "temas":temas_curso})
+
+    documento=doc_externo.render({"nombre_persona":p1.nombre, "apellido_persona":p1.apellido, "fecha":ahora, "temas":temas_curso})
     return HttpResponse(documento)
 
 def despedida(request): #segunda vista
