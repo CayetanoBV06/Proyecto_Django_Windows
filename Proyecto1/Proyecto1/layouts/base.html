@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>
+
+        {% block tittle %} {% endblock %}
+
+    </title>
+</head>
+
+<body>
+        {% include "barra.html" %}
+
+    <h1>Pildoras Informaticas</h1>
+    
+    <h3>Cursos de programacion, ofimatica y diseño web</h3>
+
+    {% block content %} {% endblock %}
+
+
+    <p>Cursos gratuitos, gracias por su visita</p>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
 from django.template import loader
+from django.shortcuts import render
 
 class Persona(object):
     def __init__(self, nombre, apellido):
@@ -22,11 +23,11 @@ def saludo(request):   #primera vista
     #plt=Template(doc_externo.read())
 
     #doc_externo.close()
-    doc_externo=loader.get_template('plantilla.html')
+    #doc_externo=loader.get_template('plantilla.html')
     #ctx=Context({"nombre_persona":p1.nombre, "apellido_persona":p1.apellido, "fecha":ahora, "temas":temas_curso})
 
-    documento=doc_externo.render({"nombre_persona":p1.nombre, "apellido_persona":p1.apellido, "fecha":ahora, "temas":temas_curso})
-    return HttpResponse(documento)
+    #documento=doc_externo.render({"nombre_persona":p1.nombre, "apellido_persona":p1.apellido, "fecha":ahora, "temas":temas_curso})
+    return render(request, "plantilla.html",{"nombre_persona":p1.nombre, "apellido_persona":p1.apellido, "fecha":ahora, "temas":temas_curso})
 
 def despedida(request): #segunda vista
     return HttpResponse("Hasta aqui llegamos")
@@ -54,3 +55,7 @@ def CalculaEdad(request,edad, agno):
     </body>
     </html>'''%(agno, edadFutura)
     return HttpResponse(documento)
+
+def cursoC(request):
+    fecha_actual=datetime.datetime.now()
+    return render(request,"CursoC.html",{"hora_fecha":fecha_actual})
